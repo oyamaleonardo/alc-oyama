@@ -1,0 +1,37 @@
+# Arquivos que o Git deve ignorar neste repositório.
+# Cada linha é um padrão; linhas com "#" são apenas comentários.
+
+# --- Python -----------------------------------------------------------------
+# Cache gerado automaticamente quando um arquivo .py é importado por outro.
+__pycache__/
+*.py[cod]
+
+# Ambientes virtuais (caso você crie um no futuro).
+.venv/
+venv/
+env/
+
+# Pastas de empacotamento/instalação.
+build/
+dist/
+*.egg-info/
+
+# --- Ferramentas de teste e análise -----------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Jupyter ----------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- Editores ---------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+
+# --- Sistema operacional ----------------------------------------------------
+# Windows
+Thumbs.db
+desktop.ini
+# macOS
+.DS_Store
