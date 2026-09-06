@@ -1,6 +1,6 @@
 # Questão 4
 
-Desenvolvido com ajuda do Claude Code, modelo `Opus 5.0`.
+Desenvolvida com ajuda do Claude Code, modelo `Opus 5.0`.
 
 ## questao_04.py
 
@@ -29,3 +29,58 @@ Cada teste imprime `[OK]` ou `[FALHA]`, e no fim vem o resumo `12 passaram, 0 fa
 **A seção "MEXA AQUI"** (item 9, perto do fim do arquivo) serve para testes customizados: tem uma matriz, um vetor e o resultado esperado. 
 
 Troque os números, salve, rode de novo. Se a conta estiver errada, vai aparecer `[FALHA]` mostrando lado a lado o esperado e o obtido.
+
+# Questão 5
+
+Desenvolvida com ajuda do Claude Code, modelo `Opus 5.0`.
+
+## questao_05.py
+
+Item (a) — `posicao_efetuador(theta1, theta2)`
+
+Recebe os ângulos em graus (ou radianos, com graus=False) e devolve (X_U, Y_U) em cm arredondados a 1 casa decimal. Alguns resultados:
+
+| θ₁ | θ₂ | X_U | Y_U | Descrição |
+| --- | --- | --- | --- | --- |
+| 0° | 0° | 35.0 | 0.0 | braço esticado: 20 + 15 |
+| 90° | 0° | 0.0 | 35.0 | o mesmo, na vertical |
+| 0° | 90° | 20.0 | 15.0 | em "L" |
+| 0° | 180° | 5.0 | 0.0 | elo 2 dobrado: 20 − 15 |
+|30° | 45° | 21.2 | 24.5 | caso genérico |
+
+Item (b) — `matriz_transformacao(theta1, theta2)`
+
+Matriz como o produto das quatro operações elementares.
+
+A transformação é a composição, nesta ordem, de:
+
+1. rotação de θ₁ -> alinha com o elo 1
+2. translação de L1 ao longo do novo x -> chega à segunda junta
+3. rotação de θ₂ -> alinha com o elo 2
+4. translação de L2 ao longo do novo x -> chega ao efetuador
+
+			T = R(θ₁) . D(L1) . R(θ₂) . D(L2)
+
+$$
+\begin{bmatrix}
+	cos(θ₁ + θ₂) & -sen(θ₁ + θ₂) & L1 \cdot cos(θ₁) + L2 \cdot cos(θ₁ + θ₂) \\
+	sen(θ₁ + θ₂) & cos(θ₁ + θ₂) & L1 \cdot sen(θ₁) + L2 \cdot sen(θ₁ + θ₂) \\
+	0 & 0 & 1
+\end{bmatrix}
+$$
+
+Por exemplo, para θ₁ = 30°, θ₂ = 45°:
+
+$$
+\begin{bmatrix}
+	0.2588 & -0.9659 & 21.2028 \\
+	0.9659 & 0.2588 & 24.4889 \\
+	0.0000 & 0.0000 & 1.0000
+\end{bmatrix}
+$$
+
+## teste_questao_05.py
+
+Os testes verificam que `RᵀR = I` e `det(R) = +1` (é rotação de verdade, não deformação), que a distância entre dois pontos não muda ao trocar de referencial, e que em 500 configurações sorteadas o alcance fica sempre entre 5 e 35 cm — exatamente `|L1 − L2|` e `L1 + L2`. 
+
+A seção "MEXA AQUI" no item 15, igual à da Questão 04.
