@@ -29,3 +29,25 @@ python questao_04.py 42
 | Caso n = 5 por extenso | Mostra u, v e A | — |
 
 As demonstrações estão na solução escrita da lista.
+
+# Questão 5
+
+Desenvolvida com ajuda do Claude Code, modelo `Opus 5.5`.
+
+## questao_05.py
+
+Verifica se uma matriz quadrada é ortogonal de duas formas. As duas funções recebem a matriz e retornam um booleano.
+
+| Função | Critério |
+| --- | --- |
+| `is_orthogonal_by_definition(P)` | `PᵀP = I` |
+| `is_orthogonal_by_vectors(P)` | colunas com norma 1 e ortogonais duas a duas |
+
+As matrizes do enunciado têm 5 algarismos significativos, por isso a comparação usa a tolerância `tol = 1e-4`.
+
+| Matriz | Resultado esperado |
+| --- | --- |
+| 6.38 a) | `True` nas duas funções |
+| 6.38 b) | `True` nas duas funções |
+| 6.39 a) | `True` nas duas funções |
+| 6.39 b) | `False` nas duas funções: as colunas têm norma 1, mas não são ortogonais |
